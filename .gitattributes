@@ -1,0 +1,5 @@
+# The task runs in a Linux container. Shell scripts and every other task file
+# must check out with LF regardless of the reviewer's platform or their
+# core.autocrlf setting - CRLF breaks bash ("set: pipefail: invalid option name").
+* text=auto eol=lf
+*.sh text eol=lf
