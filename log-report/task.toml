@@ -1,4 +1,4 @@
-artifacts = "/app/out.json"
+artifacts = ["/app/report.json"]
 
 [task]
 name = "dynamo/log-report"
@@ -12,9 +12,9 @@ artifact_type = ["text_or_log_file", "generated_output_artifact"]
 expert_time_estimate_hours = 0.3
 model_tested = "GPT-5.4"
 agent_tested = "Terminus-2"
-difficulty_explanation = "Parse a small access log and emit summary stats."
-solution_explanation = "Read the log, count requests/unique IPs, find the top path."
-verification_explanation = "Check the report file."
+difficulty_explanation = "Single-file text parsing with no external dependencies and no network access. The only real work is counting distinct client IPs and identifying the most frequently requested path, both of which are a few lines of standard-library Python for an experienced engineer."
+solution_explanation = "Read /app/access.log line by line, treat each non-empty line as one request, take the first whitespace-separated field as the client IP, and pull the request path out of the quoted request section. Write the request count, the size of the distinct-IP set, and the most common path to /app/report.json."
+verification_explanation = "The verifier parses /app/report.json and asserts the produced values against the ground truth for the bundled access.log: exactly the keys total_requests, unique_ips and top_path, with values 6, 3 and \"/index.html\". Each test maps to exactly one numbered success criterion in instruction.md, so an agent that creates an empty or placeholder file scores 0."
 
 [verifier]
 timeout_sec = 120.0
