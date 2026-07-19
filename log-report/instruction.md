@@ -6,7 +6,7 @@ Write your summary to /app/report.json. It should be a single JSON object with e
 - "unique_ips" (integer) - how many distinct client IP addresses appear in it
 - "top_path" (string) - the request path that was requested most often
 
-On the log format: every non-empty line is one request, the client IP is the first whitespace-separated field on that line, and the request path is the second token inside the quoted request section - so a line whose quoted section reads "GET /index.html HTTP/1.1" has the path /index.html.
+On the log format: every non-empty line is one request, the client IP is the first whitespace-separated field on that line, and the request path is the second token inside the quoted request section - so a line whose quoted section reads "GET /example.html HTTP/1.1" has the path /example.html.
 
 Consider the job done when all of the following hold:
 
