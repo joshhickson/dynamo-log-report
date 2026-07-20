@@ -19,8 +19,13 @@ EXPECTED_TOP_PATH = "/index.html"
 
 
 def _load_report():
-    """Parse /app/report.json and return the decoded object."""
-    with REPORT_PATH.open(encoding="utf-8") as handle:
+    """Parse /app/report.json and return the decoded object.
+
+    Decoded as utf-8-sig so that a leading byte-order mark - which some editors
+    and Windows-authored tooling prepend - does not fail an otherwise correct
+    report. Plain utf-8 would leave the BOM in place and json.load would raise.
+    """
+    with REPORT_PATH.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
 
