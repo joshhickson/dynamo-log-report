@@ -52,7 +52,7 @@ def test_report_has_exactly_the_required_keys():
 
 
 def test_total_requests_counts_every_request():
-    """Criterion 3: total_requests is an integer equal to the non-empty line count."""
+    """Criterion 3: total_requests is an integer equal to the non-blank line count."""
     value = _load_report()["total_requests"]
     assert _is_int(value), f"total_requests must be an integer, got {type(value).__name__}"
     assert value == EXPECTED_TOTAL_REQUESTS, (
